@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShortCut</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center p-4">
+
+    <div class="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+        <header class="text-center mb-10">
+            <h2 class="text-3xl font-bold text-gray-800 tracking-tight">ShortCut</h2>
+            <p class="text-gray-500 text-sm mt-2">High-performance C++ compression backend</p>
+        </header>
+
+        <form method="POST" enctype="multipart/form-data" class="space-y-8">
+            {{ form.hidden_tag() }}
+
+            <div class="space-y-3">
+                <label class="block text-sm font-semibold text-gray-700 ml-1">Select File</label>
+                <div class="relative group">
+                    {{ form.file(class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10", id="file-upload") }}
+                    
+                    <div id="drop-zone" class="flex flex-col items-center justify-center py-10 border-2 border-dashed border-gray-300 rounded-2xl bg-gray-50 group-hover:bg-blue-50 group-hover:border-blue-400 transition-all duration-300 ease-in-out">
+                        <div class="p-4 bg-white rounded-full shadow-sm mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                            </svg>
+                        </div>
+                        <p id="file-name" class="text-sm font-medium text-gray-600 px-4 text-center">Click to upload or drag and drop</p>
+                        <p class="text-xs text-gray-400 mt-2 font-light">Supports .txt and .binary</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-3">
+                <label class="block text-sm font-semibold text-gray-700 ml-1">Desired Action</label>
+                <div class="relative">
+                    {{ form.action(class="block w-full px-4 py-3 bg-white border border-gray-300 rounded-xl shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-gray-700") }}
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-400">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="w-full flex justify-center py-4 px-4 border border-transparent rounded-xl shadow-md text-base font-semibold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all active:scale-[0.98]">
+                Process and Download
+            </button>
+        </form>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('file-upload');
+        const fileNameDisplay = document.getElementById('file-name');
+        const dropZone = document.getElementById('drop-zone');
+
+        fileInput.addEventListener('change', (e) => {
+            const fileName = e.target.files[0]?.name;
+            if (fileName) {
+                // update text to the actual filename
+                fileNameDisplay.innerText = fileName;
+                // add "success" styling
+                fileNameDisplay.classList.remove('text-gray-600');
+                fileNameDisplay.classList.add('text-blue-600', 'font-bold');
+                dropZone.classList.remove('border-gray-300', 'bg-gray-50');
+                dropZone.classList.add('border-blue-400', 'bg-blue-50');
+            }
+        });
+
+        // simple drag and drop highlight
+        ['dragenter', 'dragover'].forEach(eventName => {
+            fileInput.addEventListener(eventName, () => {
+                dropZone.classList.add('bg-blue-100', 'border-blue-500');
+            }, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            fileInput.addEventListener(eventName, () => {
+                dropZone.classList.remove('bg-blue-100', 'border-blue-500');
+            }, false);
+        });
+    </script>
+</body>
+</html>

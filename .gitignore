@@ -1,0 +1,35 @@
+# --- Python / Flask ---
+__pycache__/
+.venv/
+env/
+venv/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+instance/
+.webassets-cache
+
+# --- C++ / Compilers ---
+source.out
+source.exe
+*.o
+*.obj
+*.so
+*.dylib
+
+# --- Huffman Project Artifacts ---
+# These are the files generated during testing
+*.binary
+*-decoded.txt
+*.tmp
+
+# --- IDEs / Editors ---
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# --- Logs ---
+*.log
