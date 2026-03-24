@@ -416,19 +416,18 @@ int main(int argc, char* argv[])
 	string filename = argv[1];
  	string action = argv[2];
  	char op = action[0];
+	
 	//encoding 
-	switch (op) {
-	case 'e':
-		encode(filename);
-		break;
-	case 'd':
-		decode(filename);
-		break;
-	default:
-		cout << "Enter the operation again, please!" << endl;
-	}
-	
-	
+
+	if (action == "e" || action == "compress") {
+        encode(filename);
+    } 
+    else if (action == "d" || action == "decompress") {
+        decode(filename);
+    } 
+    else {
+        cout << "Enter the operation again, please!" << endl;
+    }
 
 	//system("pause");
  
