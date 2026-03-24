@@ -16,6 +16,7 @@ ShortCut uses the Huffman Coding algorithm to reduce file sizes by assigning var
 
 ## 📸 Usage
 ### Web Interface
+![Alt Text](docs/screenshots/main_ui.png)
 
     Launch: Run ./run.sh and open http://127.0.0.1:5000 in your browser.
 
@@ -26,6 +27,7 @@ ShortCut uses the Huffman Coding algorithm to reduce file sizes by assigning var
     The modern web interface allows for seamless file processing without terminal knowledge.
 
 ### CLI Backend (Advanced)
+![ShortCut CLI Output](docs/screenshots/cli_output.png?v=2)
 
 For engineering analysis, the backend can be run directly to view performance metrics:
 ```Bash
